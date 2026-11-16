@@ -1,0 +1,292 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "GI Tract Segmentation API",
+    "description": "2.5D U-Net segmentation of the stomach, small bowel and large bowel on abdominal MRI slices. Errors always use `{\"error\": {\"code\", \"message\", \"details\"}}`. Research demo only.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "meta"
+        ],
+        "summary": "Liveness check",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Health Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/model": {
+      "get": {
+        "tags": [
+          "meta"
+        ],
+        "summary": "Model details and validation scores",
+        "operationId": "model_info_v1_model_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/segmentations": {
+      "post": {
+        "tags": [
+          "segmentation"
+        ],
+        "summary": "Segment organs on 1 or 3 MRI slices",
+        "operationId": "segment_v1_segmentations_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_segment_v1_segmentations_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SegmentationResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "`file_too_large`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "`validation_error`, `invalid_slice_count`, `invalid_image`, `size_mismatch`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_segment_v1_segmentations_post": {
+        "properties": {
+          "slices": {
+            "items": {
+              "type": "string",
+              "contentMediaType": "application/octet-stream"
+            },
+            "type": "array",
+            "title": "Slices",
+            "description": "1 slice, or 3 consecutive slices (z-2, z, z+2), PNG"
+          }
+        },
+        "type": "object",
+        "required": [
+          "slices"
+        ],
+        "title": "Body_segment_v1_segmentations_post"
+      },
+      "ErrorBody": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code",
+            "examples": [
+              "invalid_image"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "details": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Details"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ErrorBody"
+      },
+      "ErrorResponse": {
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorBody"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "title": "ErrorResponse"
+      },
+      "ModelInfo": {
+        "properties": {
+          "api_version": {
+            "type": "string",
+            "title": "Api Version"
+          },
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "classes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Classes"
+          },
+          "image_size": {
+            "type": "integer",
+            "title": "Image Size"
+          },
+          "validation": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validation",
+            "description": "Competition metric on the held-out patients"
+          },
+          "mlflow_run_ids": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Mlflow Run Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "api_version",
+          "model",
+          "classes",
+          "image_size",
+          "validation",
+          "mlflow_run_ids"
+        ],
+        "title": "ModelInfo"
+      },
+      "OrganMask": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "examples": [
+              "stomach"
+            ]
+          },
+          "present": {
+            "type": "boolean",
+            "title": "Present"
+          },
+          "area_px": {
+            "type": "integer",
+            "title": "Area Px"
+          },
+          "rle": {
+            "type": "string",
+            "title": "Rle",
+            "description": "Competition RLE (1-indexed start/length pairs, row-major) at input resolution"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "present",
+          "area_px",
+          "rle"
+        ],
+        "title": "OrganMask"
+      },
+      "SegmentationResponse": {
+        "properties": {
+          "height": {
+            "type": "integer",
+            "title": "Height"
+          },
+          "width": {
+            "type": "integer",
+            "title": "Width"
+          },
+          "slices_used": {
+            "type": "integer",
+            "title": "Slices Used",
+            "description": "1 = the slice is repeated as context; 3 = true 2.5D input"
+          },
+          "organs": {
+            "items": {
+              "$ref": "#/components/schemas/OrganMask"
+            },
+            "type": "array",
+            "title": "Organs"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer",
+            "default": "Research demo only. Not a medical device and not for clinical use."
+          }
+        },
+        "type": "object",
+        "required": [
+          "height",
+          "width",
+          "slices_used",
+          "organs"
+        ],
+        "title": "SegmentationResponse"
+      }
+    }
+  }
+}

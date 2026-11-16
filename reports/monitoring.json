@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-11-15T22:40:12+00:00",
+  "reference_volumes": 219,
+  "current_volumes": 55,
+  "values": {
+    "intensity_psi": 0.06891069299433261,
+    "unseen_resolution_share": 0.0,
+    "prevalence_change": 0.015178628499739444
+  },
+  "alerts": {
+    "intensity_psi": false,
+    "unseen_resolution_share": false,
+    "prevalence_change": false
+  },
+  "retrain_recommended": false
+}

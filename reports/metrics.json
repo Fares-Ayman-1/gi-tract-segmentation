@@ -1,0 +1,186 @@
+{
+  "trained_at": "2026-11-15T22:39:14+00:00",
+  "evaluation": {
+    "model": {
+      "dice": 0.9108065063498287,
+      "hausdorff": 0.05061641887420363,
+      "score": 0.9339527512154093
+    },
+    "empty_baseline": {
+      "dice": 0.7004610299234516,
+      "hausdorff": 1.0,
+      "score": 0.28018441196938065
+    },
+    "per_class": {
+      "large_bowel": {
+        "dice": 0.9040645678316899,
+        "hausdorff": 0.057403930529653056,
+        "score": 0.9271834688148841
+      },
+      "small_bowel": {
+        "dice": 0.8699600949435897,
+        "hausdorff": 0.06611288363192458,
+        "score": 0.9083163077982812
+      },
+      "stomach": {
+        "dice": 0.9583948562742068,
+        "hausdorff": 0.028332442461033253,
+        "score": 0.9663584770330627
+      }
+    }
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.718169315744696,
+      "val_dice_256": 0.8660997032162684,
+      "seconds": 498.0992612000009
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.3065761105386037,
+      "val_dice_256": 0.8518948773461683,
+      "seconds": 479.3028052999998
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.26327416835402073,
+      "val_dice_256": 0.892928349022792,
+      "seconds": 469.83904729999995
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.24157672752126022,
+      "val_dice_256": 0.8406161786123971,
+      "seconds": 471.1537267999993
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.22369760710052028,
+      "val_dice_256": 0.8975689721665049,
+      "seconds": 471.3388292999989
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.20592035588068422,
+      "val_dice_256": 0.8992661964309803,
+      "seconds": 466.47588820000055
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.19358291901013952,
+      "val_dice_256": 0.897541581905155,
+      "seconds": 481.62754660000064
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.1787155589416718,
+      "val_dice_256": 0.9100358275040715,
+      "seconds": 475.0978130000003
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.17091712501280873,
+      "val_dice_256": 0.9091728652323684,
+      "seconds": 534.2050006999998
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.15967797176921125,
+      "val_dice_256": 0.899702482926552,
+      "seconds": 506.9057662000014
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.14977468798622356,
+      "val_dice_256": 0.9102612825975326,
+      "seconds": 462.5279037
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.14413747769361435,
+      "val_dice_256": 0.9110318073180906,
+      "seconds": 471.2415939000002
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.1368888114053673,
+      "val_dice_256": 0.9106798991488734,
+      "seconds": 490.5498702999994
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.1326070760174248,
+      "val_dice_256": 0.9123852176338599,
+      "seconds": 485.85729920000085
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.13202800864846084,
+      "val_dice_256": 0.9117159105119936,
+      "seconds": 460.0239801000007
+    }
+  ],
+  "mlflow_run_ids": {
+    "baseline": "3e9ebac1e932426e929312e93bc3eb8b",
+    "model": "4ba37f9a1ba2419c8ae77e7765744057"
+  },
+  "valid_case_days": [
+    "case108_day0",
+    "case108_day10",
+    "case108_day13",
+    "case117_day0",
+    "case117_day13",
+    "case117_day15",
+    "case117_day16",
+    "case117_day17",
+    "case123_day0",
+    "case123_day20",
+    "case123_day22",
+    "case134_day0",
+    "case134_day21",
+    "case134_day22",
+    "case140_day0",
+    "case140_day10",
+    "case143_day0",
+    "case143_day18",
+    "case143_day23",
+    "case147_day0",
+    "case147_day14",
+    "case147_day18",
+    "case147_day19",
+    "case147_day20",
+    "case156_day0",
+    "case156_day10",
+    "case156_day11",
+    "case16_day0",
+    "case32_day0",
+    "case32_day17",
+    "case32_day18",
+    "case32_day19",
+    "case32_day20",
+    "case36_day0",
+    "case36_day10",
+    "case36_day14",
+    "case36_day16",
+    "case36_day6",
+    "case36_day8",
+    "case40_day0",
+    "case40_day16",
+    "case40_day17",
+    "case49_day0",
+    "case49_day13",
+    "case49_day15",
+    "case67_day0",
+    "case67_day12",
+    "case67_day16",
+    "case84_day0",
+    "case84_day21",
+    "case84_day23",
+    "case91_day0",
+    "case9_day0",
+    "case9_day20",
+    "case9_day22"
+  ],
+  "minutes": 131.42124031999998
+}

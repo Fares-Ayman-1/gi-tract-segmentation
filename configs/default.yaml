@@ -1,0 +1,30 @@
+paths:
+  raw: data/raw
+  cache: data/cache            # per-volume npz: uint8 images + bit-packed masks at image_size
+  models: models
+  reports: reports
+
+tracking_uri: ../mlflow.db
+artifact_root: ../mlruns
+experiment: gi-tract-segmentation
+
+classes: [large_bowel, small_bowel, stomach]
+image_size: 256
+context_stride: 2              # 2.5D input = slices (z - 2, z, z + 2) as 3 channels
+folds: 5
+valid_fold: 0                  # GroupKFold by patient: no patient appears in both train and validation
+
+model:
+  arch: Unet
+  encoder: resnet34
+  encoder_weights: imagenet
+train:
+  epochs: 15
+  batch_size: 16
+  lr: 0.001
+  weight_decay: 0.0001
+  num_workers: 0               # Windows, small paging file: workers and their shared-memory batches
+                               # exceed the commit limit (error 1455); loading in-process is reliable
+  amp: true
+  seed: 42
+threshold: 0.5

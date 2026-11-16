@@ -1,0 +1,19 @@
+services:
+  api:
+    build: .
+    image: gisseg:latest
+    ports: ["8020:8020"]
+    volumes:
+      - ./models:/app/models:ro
+      - ./reports:/app/reports:ro
+
+  viewer:
+    image: gisseg:latest
+    depends_on: [api]
+    command: ["streamlit", "run", "app/viewer.py", "--server.port=8521", "--server.address=0.0.0.0",
+              "--server.headless=true"]
+    ports: ["8521:8521"]
+    volumes:
+      - ./models:/app/models:ro
+      - ./reports:/app/reports:ro
+      - ./data/cache:/app/data/cache:ro
