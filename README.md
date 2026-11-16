@@ -39,8 +39,12 @@ slice counts as perfect. The 3D Hausdorff term is what separates a real model fr
 
 **How this compares with Kaggle:** these numbers come from one validation fold, not from the
 competition's hidden test set, so they are **not comparable with the leaderboard**. It is a code
-competition: a hidden-test score can only come from a submission run inside a Kaggle notebook, which this
-repository does not include yet.
+competition: a hidden-test score can only come from a submission run inside a Kaggle notebook, and this
+project does not make one.
+
+**Kaggle notebook:** a compact, runnable version that trains the same model for 8 epochs on a Kaggle T4
+GPU and scores it on the same 55 validation sessions: **0.9326** (Dice 0.9112, Hausdorff 0.0532):
+[GI Tract 2.5D U-Net and the Competition Metric](https://www.kaggle.com/code/faresayman1/gi-tract-2-5d-u-net-and-the-competition-metric).
 
 Training: 15 epochs, batch 16, one-cycle learning rate (peak 0.001), mixed precision, 131 minutes on an
 RTX 3050 Laptop GPU (6 GB). Full tables with the MLflow run ids are in [RESULTS.md](RESULTS.md), generated
