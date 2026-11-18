@@ -50,7 +50,8 @@ class Segmenter:
 
         Training divided every session by its 99.5th-percentile intensity. Passing that value as
         ``volume_p995`` reproduces the training input exactly; without it the percentile of the given
-        slices is used, which can differ (e.g. stomach Dice 0.62 -> 0.29 on one held-out slice).
+        slices is used, which can differ (stomach Dice 0.604 with it, 0.245 without, on held-out
+        case108_day0 slice 73; see the README).
         """
         if len(slices) == 1:
             slices = slices * 3

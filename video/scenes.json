@@ -1,0 +1,15 @@
+[
+  {"key": "hook", "dur": 210, "energy": 0, "whoosh": false},
+  {"key": "why", "dur": 165, "energy": 1},
+  {"key": "data", "dur": 210, "energy": 1, "ticks": [6, 12, 18]},
+  {"key": "twofive", "dur": 200, "energy": 1, "ticks": [88, 120]},
+  {"key": "model", "dur": 165, "energy": 2, "ticks": [70, 78, 86]},
+  {"key": "metric", "dur": 210, "energy": 2, "ticks": [92]},
+  {"key": "curve", "dur": 230, "energy": 2},
+  {"key": "results", "dur": 300, "energy": 3, "riser": true, "ticks": [28, 36, 56, 64, 72]},
+  {"key": "insight", "dur": 240, "energy": 2, "ticks": [112, 122]},
+  {"key": "miss", "dur": 230, "energy": 1, "ticks": [86]},
+  {"key": "demo", "dur": 330, "energy": 2},
+  {"key": "eng", "dur": 195, "energy": 2, "ticks": [22, 27, 32, 37, 42, 47]},
+  {"key": "outro", "dur": 210, "energy": 1, "boom": true}
+]
